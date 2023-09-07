@@ -4,8 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Alumno/source/repos/5_10/polo/GAM/Content/bover.png</File>
-    <File>C:/Users/Alumno/source/repos/5_10/polo/GAM/Content/rica.png</File>
+    <File>C:/juego5°10/GAM/polo/GAM/Content/copa.webp</File>
+    <File>C:/juego5°10/GAM/polo/GAM/Content/messi.jpg</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

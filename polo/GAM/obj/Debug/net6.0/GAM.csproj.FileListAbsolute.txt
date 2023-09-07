@@ -25,3 +25,6 @@ C:\Users\Alumno\source\repos\5_10\polo\GAM\obj\Debug\net6.0\GAM.genruntimeconfig
 C:\Users\Alumno\source\repos\5_10\polo\GAM\obj\Debug\net6.0\ref\GAM.dll
 C:\Users\Alumno\source\repos\5_10\polo\GAM\bin\Debug\net6.0\Content\bover.xnb
 C:\Users\Alumno\source\repos\5_10\polo\GAM\bin\Debug\net6.0\Content\rica.xnb
+C:\juego5°10\GAM\polo\GAM\obj\Debug\net6.0\GAM.dll
+C:\juego5°10\GAM\polo\GAM\obj\Debug\net6.0\refint\GAM.dll
+C:\juego5°10\GAM\polo\GAM\obj\Debug\net6.0\GAM.pdb
