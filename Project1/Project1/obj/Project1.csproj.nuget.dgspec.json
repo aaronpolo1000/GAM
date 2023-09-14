@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\Project1.csproj": {}
+    "C:\\juego5°10\\GAM\\Project1\\Project1\\Project1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\Project1.csproj": {
+    "C:\\juego5°10\\GAM\\Project1\\Project1\\Project1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\Project1.csproj",
+        "projectUniqueName": "C:\\juego5°10\\GAM\\Project1\\Project1\\Project1.csproj",
         "projectName": "Project1",
-        "projectPath": "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\Project1.csproj",
+        "projectPath": "C:\\juego5°10\\GAM\\Project1\\Project1\\Project1.csproj",
         "packagesPath": "C:\\Users\\Alumno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\obj\\",
+        "outputPath": "C:\\juego5°10\\GAM\\Project1\\Project1\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\Alumno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -69,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
