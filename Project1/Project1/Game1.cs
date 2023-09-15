@@ -28,14 +28,14 @@ namespace Project1
         private Vector2 _bochaPosition;
         private Vector2 _bochaSpeed= new Vector2(0,0);
         private bool _bochatocada=false, a,b,c,d;
-        private Texture2D _barraarriba;
-        private Texture2D _barraabajo;
-        private Texture2D _barraizzquierdoz;
+        private Texture2D _barraizquierda;
         private Texture2D _barraderecha;
-        private Vector2 _barraderechaPosition;
-        private Vector2 _barraizquierdozPosition;
+        private Texture2D _barraabajo;
+        private Texture2D _barraarriba;
         private Vector2 _barraarribaPosition;
         private Vector2 _barraabajoPosition;
+        private Vector2 _barraizquierdaPosition;
+        private Vector2 _barraderechaPosition;
 
 
 
@@ -60,25 +60,24 @@ namespace Project1
             // Carga la textura "pruebas" en la variable.
             _p1Texture = Content.Load<Texture2D>("a");
             // Define la posición de inicio del sprite "pruebas".
-            _p1Position = new Vector2(100, 100);
+            _p1Position = new Vector2(500, 200);
 
 
             // Carga las textura "manzana" en la variable.
             _p2Texture = Content.Load<Texture2D>("c");
             // (?)
-            _p2Position = new Vector2(500, 200);
+            _p2Position = new Vector2(100, 100);
             _bochaTexture = Content.Load<Texture2D>("bocha5");
             _bochaPosition = new Vector2(379, 219);
             _bochaSpeed = new Vector2(0, 0);
-            _barraarriba = Content.Load<Texture2D>("p");
-            _barraabajo= Content.Load<Texture2D>("p");
-            _barraderecha= Content.Load<Texture2D>("k");
-            _barraizzquierdoz= Content.Load<Texture2D>("k");
-            _barraarribaPosition = new Vector2(35, -38);
-            _barraabajoPosition = new Vector2(734,-38);
-            _barraderechaPosition = new Vector2(48, 40);
-            _barraizquierdozPosition = new Vector2(48, 439);
-      
+            _barraizquierda = Content.Load<Texture2D>("p");
+            _barraderecha = Content.Load<Texture2D>("p");
+            _barraarriba = Content.Load<Texture2D>("k");
+            _barraabajo = Content.Load<Texture2D>("k");
+            _barraizquierdaPosition = new Vector2(35, -38);
+            _barraderechaPosition = new Vector2(734, -38);
+            _barraarribaPosition = new Vector2(48, 40);
+            _barraabajoPosition = new Vector2(48, 439);
         }
 
         protected override void Update(GameTime gameTime)
@@ -87,17 +86,26 @@ namespace Project1
             // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
             Rectangle manzanaRectangle = new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 30, 30);
             Rectangle bochaRectangle = new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 30, 30);
-            Rectangle lineaRectangle = new Rectangle((int)_barraarribaPosition.X,(int)_barraarribaPosition.Y, 30, 30);
-            Rectangle linea2Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 30, 30);
-            Rectangle linea3Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 30);
-            Rectangle linea4Rectangle = new Rectangle((int)_barraizquierdozPosition.X, (int)_barraizquierdozPosition.Y, 30, 30);
+            Rectangle lineaRectangle = new Rectangle((int)_barraizquierdaPosition.X,(int)_barraizquierdaPosition.Y, 1, 700);
+            Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 700);
+            Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 705, 1);
+            Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 705, 1);
 
             // Se utiliza para poder recibir el estado del teclado.
             KeyboardState keyboardState = Keyboard.GetState();
-
+            Vector2 speed = new Vector2(2,2);
+            Vector2 speedmenos = new Vector2(-2, -2);
             bool _p1movimiento = false;
             bool _p2movimiento = false;
+            float friccion1 = 0.976f;
+            float friccion = 0.6f;
+            if (bochaRectangle.Intersects(linea3Rectangle))
+            {
 
+                _bochaSpeed = Vector2.Normalize(speed) * 4;
+         
+                _bochaPosition.Y += _bochaSpeed.Y;
+            }
             if (keyboardState.IsKeyDown(Keys.Left) && _p1Position.X > 44)
                 {
                 _p1Speed.X -= 2;
@@ -117,14 +125,14 @@ namespace Project1
                 _p1Speed.X = 0;
             }
 
-            float friccion1 = 0.976f;
-            float friccion = 0.6f;
+       
 
-            if (bochaRectangle.Intersects(pruebasRectangle)&&!_p1movimiento)
+     
+            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento)
             {
-                
-                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
-                
+
+                _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
+
             }
             if ( _bochaPosition.X > 48 && _bochaPosition.X < 713)
             {
@@ -262,10 +270,10 @@ namespace Project1
            
                 _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45,45), Color.White);
             _spriteBatch.Draw(_bochaTexture,new Rectangle((int)_bochaPosition.X,(int)_bochaPosition.Y,40,40), Color.White);
-            _spriteBatch.Draw(_barraarriba,new Rectangle((int)_barraarribaPosition.X,(int)_barraarribaPosition.Y,30,700), Color.Red);
-            _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 30, 700), Color.Red);
-            _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 705, 1), Color.Red);
-            _spriteBatch.Draw(_barraizzquierdoz, new Rectangle((int)_barraizquierdozPosition.X, (int)_barraizquierdozPosition.Y, 705, 1), Color.Red);
+            _spriteBatch.Draw(_barraizquierda,new Rectangle((int)_barraizquierdaPosition.X,(int)_barraizquierdaPosition.Y,30,700), Color.Red);
+            _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 700), Color.Red);
+            _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 705, 1), Color.Red);
+            _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 705, 1), Color.Red);
 
 
 
