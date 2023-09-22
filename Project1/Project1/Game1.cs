@@ -170,7 +170,7 @@ namespace Project1
        
 
      
-            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento)
+            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
             {
 
                 _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
@@ -204,7 +204,7 @@ namespace Project1
                 _p1Speed.Y = 0; _p1movimiento = true;
             }
 
-            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento )
+            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
             {
                 _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
             }
@@ -245,7 +245,7 @@ namespace Project1
             {
                 _p2Speed.X = 0; _p2movimiento = true;
             }
-            if (bochaRectangle.Intersects(manzanaRectangle)&&!_p2movimiento)
+            if (bochaRectangle.Intersects(manzanaRectangle)&&!_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
             {
 
                 {
@@ -279,7 +279,7 @@ namespace Project1
                 _p2Speed.Y = 0; _p2movimiento = true;
             }
 
-            if (bochaRectangle.Intersects(manzanaRectangle)&&!_p2movimiento )
+            if (bochaRectangle.Intersects(manzanaRectangle)&&!_p2movimiento&& keyboardState.IsKeyDown(Keys.Q ))
             {
                
                     _bochaSpeed = Vector2.Normalize(_p2Speed) * 3;
@@ -293,7 +293,55 @@ namespace Project1
             }
             _p2Position.Y += _p2Speed.Y;
             _p2Speed *= friccion;
-       
+            if (pruebasRectangle.Intersects(manzanaRectangle))
+            {
+                // Determinar la dirección del empuje
+                Vector2 pushDirection = _p2Position - _p1Position;
+                pushDirection.Normalize();
+
+                // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                // Aquí simplemente empujamos por una constante
+                const float pushAmount = 3.8f; // Ajusta según tus necesidades
+                _p2Position += pushDirection * pushAmount;
+            }
+            if (manzanaRectangle.Intersects(pruebasRectangle))
+            {
+                // Determinar la dirección del empuje
+                Vector2 pushDirection = _p1Position - _p2Position;
+                pushDirection.Normalize();
+
+                // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                // Aquí simplemente empujamos por una constante
+                const float pushAmount = 3.8f; // Ajusta según tus necesidades
+                _p1Position += pushDirection * pushAmount;
+            }
+           
+
+            if (bochaRectangle.Intersects(manzanaRectangle))
+            {
+                // Determinar la dirección del empuje
+                Vector2 pushDirection = _bochaPosition - _p2Position;
+                pushDirection.Normalize();
+
+                // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                // Aquí simplemente empujamos por una constante
+                const float pushAmount = 4.5f; // Ajusta según tus necesidades
+                _bochaPosition += pushDirection * pushAmount;
+
+            }
+            if (bochaRectangle.Intersects(pruebasRectangle))
+            {
+                // Determinar la dirección del empuje
+                Vector2 pushDirection = _bochaPosition - _p1Position;
+                pushDirection.Normalize();
+
+                // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                // Aquí simplemente empujamos por una constante
+                const float pushAmount = 4f; // Ajusta según tus necesidades
+                _bochaPosition += pushDirection * pushAmount;
+
+            }
+
 
 
 

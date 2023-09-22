@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wUh8BhpWG8fINen6fUnr10+sGD5Q8q2CuiKhpbJEslttG0ZA5WEyL09q3gVc1CoZIlWCxZWUGq7cyDasB9NaWQ==",
+  "dgSpecHash": "qeqvmOUb3m6+Q56kBsf+gwHX9B1cFK56eXd3uXiWKihi8ZCBarm/iQK4NyJrMUaGNVJWwhn+knYMb/nCPr05wg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alumno\\source\\repos\\GAM\\Project1\\Project1\\Project1.csproj",
+  "projectFilePath": "C:\\xampp\\htdocs\\GAM\\Project1\\Project1\\Project1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alumno\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\Alumno\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
