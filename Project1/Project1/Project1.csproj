@@ -26,4 +26,10 @@
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
   </Target>
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\xampp\htdocs\GAM\Project1\Project1\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\xampp\htdocs\GAM\Project1\Project1\.editorconfig" />
+  </ItemGroup>
 </Project>
