@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\juego5°10\Project1\Project1\bin\Debug\net6.0\Content\copa.xnb
 C:\juego5°10\Project1\Project1\bin\Debug\net6.0\Content\messi.xnb
 C:\juego5°10\Project1\Project1\bin\Debug\net6.0\Project1.exe
@@ -151,3 +152,5 @@ C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\fondo2.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\borja.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\personajes.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\river2.xnb
+=======
+>>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80

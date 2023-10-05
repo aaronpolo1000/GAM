@@ -1,2 +1,14 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/xampp/htdocs/GAM/Project1/Project1/Content/river2.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/river2.xnb","TextureProcessor","Texture2DContent",157246,1734101,0,1524818
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/a.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/a.xnb","TextureProcessor","Texture2DContent",6093,561685,0,1132605
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/b.jpg","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/b.xnb","TextureProcessor","Texture2DContent",7360,518485,0,0093019
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha2.jpg","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/bocha2.xnb","TextureProcessor","Texture2DContent",93906,5943685,0,1451406
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha3.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/bocha3.xnb","TextureProcessor","Texture2DContent",22672,2944085,0,0533475
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha4.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/bocha4.xnb","TextureProcessor","Texture2DContent",5920,202585,0,0060652
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha5.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/bocha5.xnb","TextureProcessor","Texture2DContent",35434,999189,0,0192496
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/c.webp","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/c.xnb","TextureProcessor","Texture2DContent",1040,160085,0,0048694
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/copa.webp","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/copa.xnb","TextureProcessor","Texture2DContent",12024,718085,0,0131578
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/fondo.jpg","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/fondo.xnb","TextureProcessor","Texture2DContent",27192,507685,0,0091916
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/k.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/k.xnb","TextureProcessor","Texture2DContent",4041,1018249,0,0182112
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/l.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/l.xnb","TextureProcessor","Texture2DContent",966,2916085,0,0526035
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/messi.jpg","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/messi.xnb","TextureProcessor","Texture2DContent",5950,202329,0,0056669
+"C:/xampp/htdocs/GAM/Project1/Project1/Content/p.png","C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/p.xnb","TextureProcessor","Texture2DContent",3550,285597,0,0067133
