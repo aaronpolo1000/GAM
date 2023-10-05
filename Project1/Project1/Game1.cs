@@ -38,19 +38,15 @@ namespace Project1
         private Vector2 _barraarribaPosition;
         private Vector2 _barraabajoPosition;
         private Vector2 _barraizquierdaPosition;
-<<<<<<< HEAD
         private Vector2 _barraderechaPosition;
         private int pantalla = 1;
         private SpriteFont myFont;
         private Texture2D _river;
         private Vector2 _riverPosition;
 
-=======
-        private Vector2 _barraderechaPosition;
         private Vector2 _barraizquierdaPositionarco;
         private Texture2D _barraderechaarco;
         private Vector2 _barraderechaPositionarco;
->>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80
 
 
 
@@ -109,93 +105,20 @@ namespace Project1
 
         protected override void Update(GameTime gameTime)
         {
-<<<<<<< HEAD
             if (pantalla == 1)
             {
                 KeyboardState inicio = Keyboard.GetState();
                 if (inicio.IsKeyDown(Keys.Enter))
-=======
-            Rectangle pruebasRectangle = new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 30, 30);
-            // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
-            Rectangle manzanaRectangle = new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 30, 30);
-            Rectangle bochaRectangle = new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 30, 30);
-            Rectangle lineaRectanglearcoderecha = new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 1, 192);
-            Rectangle lineaRectanglearcoizquierza = new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 10, 192);
-            Rectangle lineaRectangle = new Rectangle((int)_barraizquierdaPosition.X,(int)_barraizquierdaPosition.Y, 10, 250);
-            Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 250);
-            Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1);
-            Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 40);
-
-            // Se utiliza para poder recibir el estado del teclado.
-            KeyboardState keyboardState = Keyboard.GetState();
-            bool _p1movimiento = false;
-            bool _p2movimiento = false;
-            float friccion1 = 0.99f;
-            float friccion = 0.6f;
-            Vector2 velocidad = new Vector2(2f, 2f);
-            if (bochaRectangle.Intersects(linea3Rectangle))
-            {
-                Vector2 normal = Vector2.Normalize(new Vector2(linea3Rectangle.X - bochaRectangle.X, linea3Rectangle.Y - bochaRectangle.Y));
-
-                float velocidadPerpendicular = (Vector2.Dot(velocidad, normal));
-
-                Vector2 velocidadParalela = velocidad - velocidadPerpendicular * normal;
-
-                velocidad = velocidadParalela - velocidadPerpendicular * normal;
-                _bochaSpeed.Y = velocidad.Y;
-            }
-            if (bochaRectangle.Intersects(linea4Rectangle))
-            {
-                Vector2 normal = Vector2.Normalize(new Vector2(linea4Rectangle.X - bochaRectangle.X, linea4Rectangle.Y - bochaRectangle.Y));
-
-                float velocidadPerpendicular = (Vector2.Dot(velocidad, normal));
-
-                Vector2 velocidadParalela = velocidad - velocidadPerpendicular * normal;
-
-                velocidad = velocidadParalela - velocidadPerpendicular * normal;
-                _bochaSpeed.Y = -velocidad.Y;
-            }
-            if (bochaRectangle.Intersects(linea2Rectangle)    || bochaRectangle.Intersects(lineaRectanglearcoderecha))
-            {
-                Vector2 normal = Vector2.Normalize(new Vector2(linea2Rectangle.X - bochaRectangle.X, linea2Rectangle.Y - bochaRectangle.Y));
-
-                float velocidadPerpendicular = (Vector2.Dot(velocidad, normal));
-
-                Vector2 velocidadParalela = velocidad - velocidadPerpendicular * normal;
-
-                velocidad = velocidadParalela - velocidadPerpendicular * normal;
-                _bochaSpeed.X = -velocidad.X;
-            }
-
-            if (bochaRectangle.Intersects(lineaRectangle) || bochaRectangle.Intersects(lineaRectanglearcoizquierza) )
-            {
-                Vector2 normal = Vector2.Normalize(new Vector2(lineaRectangle.X - bochaRectangle.X, lineaRectangle.Y - bochaRectangle.Y));
-
-                float velocidadPerpendicular = (Vector2.Dot(velocidad, normal));
-
-                Vector2 velocidadParalela = velocidad - velocidadPerpendicular * normal;
-
-                velocidad = velocidadParalela - velocidadPerpendicular * normal*4;
-                _bochaSpeed.X = velocidad.X;
-            }
-
-
-
-
-
-
-            if (keyboardState.IsKeyDown(Keys.Left) )
->>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80
                 {
                     pantalla = 2;
 
-<<<<<<< HEAD
                 }
             }
-            else if (pantalla == 2) {
+            else if (pantalla == 2)
+            {
 
 
-                Rectangle river = new Rectangle((int)_riverPosition.X,(int)_riverPosition.Y,200,200);
+                Rectangle river = new Rectangle((int)_riverPosition.X, (int)_riverPosition.Y, 200, 200);
                 KeyboardState inicio2 = Keyboard.GetState();
                 if (inicio2.IsKeyDown(Keys.D))
                 {
@@ -203,123 +126,19 @@ namespace Project1
 
                 }
 
-=======
-               else if (keyboardState.IsKeyDown(Keys.Right))
-                {
-               
-
-                _p1Speed.X += 2;
-                _p1movimiento = false;
             }
-            else
+            else if (pantalla == 3)
             {
-                _p1movimiento = true;
-                _p1Speed.X = 0;
-            }
-
-       
-
-     
-            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
-            {
-
-                _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
-
-            }
-
-            _bochaPosition.X += _bochaSpeed.X;
-            _bochaSpeed *= friccion1;
-  
-            _p1Position.X += _p1Speed.X;
-            _p1Speed *= friccion;
-          
-       
-
-
-            if (keyboardState.IsKeyDown(Keys.Up))
-            {
-                _p1Speed.Y -= 2; _p1movimiento = false;
-            }
-
-            else if (keyboardState.IsKeyDown(Keys.Down) )
-            {
-
-
-                _p1Speed.Y += 2; _p1movimiento = false;
-            }
-            else
-            {
-                _p1Speed.Y = 0; _p1movimiento = true;
-            }
-
-
-
-            if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
-            {
-
-                _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
-
-            }
-            _bochaPosition.Y += _bochaSpeed.Y;
-            _bochaSpeed *= friccion1;
-            _p1Position.Y += _p1Speed.Y;
-            _p1Speed *= friccion;
-        
-
-
-
-
-
-
-
-
-
-
-            if (keyboardState.IsKeyDown(Keys.A) )
-            {
-                _p2Speed.X -= 2; _p2movimiento = false;
-            }
-
-            else if (keyboardState.IsKeyDown(Keys.D))
-            {
-
-
-                _p2Speed.X += 2; _p2movimiento = false;
-            }
-            else
-            {
-                _p2Speed.X = 0; _p2movimiento = true;
-            }
-            if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
-            {
-
-                {
-                    _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
-                }
-            }
-
-            _bochaPosition.X += _bochaSpeed.X;
-            _bochaSpeed *= friccion1;
-            _p2Position.X += _p2Speed.X;
-            _p2Speed *= friccion;
-       
- 
-            if (keyboardState.IsKeyDown(Keys.W) )
-            {
-                _p2Speed.Y -= 2; _p2movimiento = false;
->>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80
-            }
-            else if (pantalla==3) { 
-
-<<<<<<< HEAD
                 Rectangle pruebasRectangle = new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 30, 30);
                 // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
                 Rectangle manzanaRectangle = new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 30, 30);
                 Rectangle bochaRectangle = new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 30, 30);
-                Rectangle lineaRectangle = new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 10, 700);
-                Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 700);
-                Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 705, 1);
-                Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 705, 40);
+                Rectangle lineaRectanglearcoderecha = new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 1, 192);
+                Rectangle lineaRectanglearcoizquierza = new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 10, 192);
+                Rectangle lineaRectangle = new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 10, 250);
+                Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 250);
+                Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1);
+                Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 40);
 
                 // Se utiliza para poder recibir el estado del teclado.
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -350,7 +169,7 @@ namespace Project1
                     velocidad = velocidadParalela - velocidadPerpendicular * normal;
                     _bochaSpeed.Y = -velocidad.Y;
                 }
-                if (bochaRectangle.Intersects(linea2Rectangle))
+                if (bochaRectangle.Intersects(linea2Rectangle) || bochaRectangle.Intersects(lineaRectanglearcoderecha))
                 {
                     Vector2 normal = Vector2.Normalize(new Vector2(linea2Rectangle.X - bochaRectangle.X, linea2Rectangle.Y - bochaRectangle.Y));
 
@@ -361,7 +180,8 @@ namespace Project1
                     velocidad = velocidadParalela - velocidadPerpendicular * normal;
                     _bochaSpeed.X = -velocidad.X;
                 }
-                if (bochaRectangle.Intersects(lineaRectangle))
+
+                if (bochaRectangle.Intersects(lineaRectangle) || bochaRectangle.Intersects(lineaRectanglearcoizquierza))
                 {
                     Vector2 normal = Vector2.Normalize(new Vector2(lineaRectangle.X - bochaRectangle.X, lineaRectangle.Y - bochaRectangle.Y));
 
@@ -378,13 +198,13 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.Left) && _p1Position.X > 44)
+                if (keyboardState.IsKeyDown(Keys.Left))
                 {
                     _p1Speed.X -= 2;
                     _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Right) && _p1Position.X < 710)
+                else if (keyboardState.IsKeyDown(Keys.Right))
                 {
 
 
@@ -403,27 +223,25 @@ namespace Project1
                 if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
                 {
 
-                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
+                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
 
                 }
-                if (_bochaPosition.X > 32 && _bochaPosition.X < 713)
-                {
 
-                    _bochaPosition.X += _bochaSpeed.X;
-                    _bochaSpeed *= friccion1;
-                }
+                _bochaPosition.X += _bochaSpeed.X;
+                _bochaSpeed *= friccion1;
+
                 _p1Position.X += _p1Speed.X;
                 _p1Speed *= friccion;
 
 
 
 
-                if (keyboardState.IsKeyDown(Keys.Up) && _p1Position.Y > 33)
+                if (keyboardState.IsKeyDown(Keys.Up))
                 {
                     _p1Speed.Y -= 2; _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Down) && _p1Position.Y < 401)
+                else if (keyboardState.IsKeyDown(Keys.Down))
                 {
 
 
@@ -434,19 +252,16 @@ namespace Project1
                     _p1Speed.Y = 0; _p1movimiento = true;
                 }
 
+
+
                 if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
                 {
-                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 3;
+
+                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
+
                 }
-
-                if (_bochaPosition.Y > 33 && _bochaPosition.Y < _barraabajoPosition.Y)
-                {
-
-
-                    _bochaPosition.Y += _bochaSpeed.Y;
-                    _bochaSpeed *= friccion1;
-                }
-
+                _bochaPosition.Y += _bochaSpeed.Y;
+                _bochaSpeed *= friccion1;
                 _p1Position.Y += _p1Speed.Y;
                 _p1Speed *= friccion;
 
@@ -460,12 +275,12 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.A) && _p2Position.X > 48)
+                if (keyboardState.IsKeyDown(Keys.A))
                 {
                     _p2Speed.X -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.D) && _p2Position.X < 705)
+                else if (keyboardState.IsKeyDown(Keys.D))
                 {
 
 
@@ -479,26 +294,22 @@ namespace Project1
                 {
 
                     {
-                        _bochaSpeed = Vector2.Normalize(_p2Speed) * 3;
+                        _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
                     }
                 }
 
-                if (_bochaPosition.X > 48 && _bochaPosition.X < 700)
-                {
-
-                    _bochaPosition.X += _bochaSpeed.X;
-                    _bochaSpeed *= friccion1;
-                }
+                _bochaPosition.X += _bochaSpeed.X;
+                _bochaSpeed *= friccion1;
                 _p2Position.X += _p2Speed.X;
                 _p2Speed *= friccion;
 
 
-                if (keyboardState.IsKeyDown(Keys.W) && _p2Position.Y > 33)
+                if (keyboardState.IsKeyDown(Keys.W))
                 {
                     _p2Speed.Y -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.S) && _p2Position.Y < 400)
+                else if (keyboardState.IsKeyDown(Keys.S))
                 {
 
 
@@ -512,44 +323,12 @@ namespace Project1
                 if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
                 {
 
-                    _bochaSpeed = Vector2.Normalize(_p2Speed) * 3;
-
+                    {
+                        _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
+                    }
                 }
-                if (_bochaPosition.Y > 33 && _bochaPosition.Y < 390)
-                {
-=======
-            else if (keyboardState.IsKeyDown(Keys.S) )
-            {
-
-
-                _p2Speed.Y += 2; _p2movimiento = false;
-            }
-            else
-            {
-                _p2Speed.Y = 0; _p2movimiento = true;
-            }
-
-            if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
-            {
-
-                {
-                    _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
-                }
-            }
-            _bochaPosition.Y += _bochaSpeed.Y;
-            _bochaSpeed *= friccion1;
-            _p2Position.Y += _p2Speed.Y;
-            _p2Speed *= friccion;
-            if (pruebasRectangle.Intersects(manzanaRectangle))
-            {
-                // Determinar la dirección del empuje
-                Vector2 pushDirection = _p2Position - _p1Position;
-                pushDirection.Normalize();
->>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80
-
-                    _bochaPosition.Y += _bochaSpeed.Y;
-                    _bochaSpeed *= friccion1;
-                }
+                _bochaPosition.Y += _bochaSpeed.Y;
+                _bochaSpeed *= friccion1;
                 _p2Position.Y += _p2Speed.Y;
                 _p2Speed *= friccion;
                 if (pruebasRectangle.Intersects(manzanaRectangle))
@@ -558,7 +337,7 @@ namespace Project1
                     Vector2 pushDirection = _p2Position - _p1Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
                     // Aquí simplemente empujamos por una constante
                     const float pushAmount = 3.8f; // Ajusta según tus necesidades
                     _p2Position += pushDirection * pushAmount;
@@ -569,7 +348,7 @@ namespace Project1
                     Vector2 pushDirection = _p1Position - _p2Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
                     // Aquí simplemente empujamos por una constante
                     const float pushAmount = 3.8f; // Ajusta según tus necesidades
                     _p1Position += pushDirection * pushAmount;
@@ -582,7 +361,7 @@ namespace Project1
                     Vector2 pushDirection = _bochaPosition - _p2Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
                     // Aquí simplemente empujamos por una constante
                     const float pushAmount = 4.5f; // Ajusta según tus necesidades
                     _bochaPosition += pushDirection * pushAmount;
@@ -594,16 +373,13 @@ namespace Project1
                     Vector2 pushDirection = _bochaPosition - _p1Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición. 
+                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
                     // Aquí simplemente empujamos por una constante
                     const float pushAmount = 4f; // Ajusta según tus necesidades
                     _bochaPosition += pushDirection * pushAmount;
 
-                } }
-
-
-
-
+                }
+            }
             base.Update(gameTime); 
         }
 
@@ -613,7 +389,6 @@ namespace Project1
             // Limpia 20 veces por segundo la imagen.
 
             _spriteBatch.Begin();
-<<<<<<< HEAD
 
 
             if (pantalla == 1)
@@ -634,8 +409,7 @@ namespace Project1
 
 
             }
-            else if (pantalla==3) { 
-
+            else if (pantalla==3) {
 
 
 
@@ -644,28 +418,14 @@ namespace Project1
 
                 _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.White);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
-                _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 700), Color.Transparent);
-                _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 700), Color.Transparent);
-                _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 705, 1), Color.Transparent);
-                _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 705, 1), Color.Transparent);
+                _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 450), Color.Transparent);
+                _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
+                _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Transparent);
+                _spriteBatch.Draw(_barraderechaarco, new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 30, 192), Color.Transparent);
+                _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1), Color.Transparent);
+                _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 1), Color.Transparent);
             }
 
-=======
-            
-            _spriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-            _spriteBatch.Draw(_p1Texture, new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 45, 45), Color.White);
-           
-                _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45,45), Color.White);
-            _spriteBatch.Draw(_bochaTexture,new Rectangle((int)_bochaPosition.X,(int)_bochaPosition.Y,40,40), Color.White);
-            _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 450), Color.Transparent);
-            _spriteBatch.Draw(_barraizquierda,new Rectangle((int)_barraizquierdaPosition.X,(int)_barraizquierdaPosition.Y,30,192), Color.Transparent);
-            _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Transparent);
-            _spriteBatch.Draw(_barraderechaarco, new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 30, 192), Color.Transparent);
-            _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1), Color.Transparent);
-            _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y,1200, 1), Color.Transparent);
->>>>>>> 624e6fab2eaaeeabba2a311b429a7710ace86a80
-
-            
 
             _spriteBatch.End();
             base.Draw(gameTime);
