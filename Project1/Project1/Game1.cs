@@ -47,6 +47,10 @@ namespace Project1
         private Vector2 _barraizquierdaPositionarco;
         private Texture2D _barraderechaarco;
         private Vector2 _barraderechaPositionarco;
+        private Texture2D _barragolizquierda;
+        private Vector2 _barragolizquierdaPosition;
+        private Texture2D _barragolderecha;
+        private Vector2 _barragolderechaPosition;
 
 
 
@@ -91,14 +95,19 @@ namespace Project1
             _barraderecha = Content.Load<Texture2D>("p");
             _barraarriba = Content.Load<Texture2D>("k");
             _barraabajo = Content.Load<Texture2D>("k");
-            _barraderechaPosition = new Vector2(1183, 10);
+            _barraderechaPosition = new Vector2(1183, 20);
             _barraarribaPosition = new Vector2(48, 60);
             _barraabajoPosition = new Vector2(48, 650);
             _barraizquierdaPosition = new Vector2(65, 30);
             _barraizquierdaarco = Content.Load<Texture2D>("p");
-            _barraizquierdaPositionarco = new Vector2(65,450);
+            _barraizquierdaPositionarco = new Vector2(65,430);
             _barraderechaarco = Content.Load<Texture2D>("p");
             _barraderechaPositionarco = new Vector2(1183, 430);
+            _barragolizquierda =Content.Load<Texture2D>("p");
+            _barragolizquierdaPosition = new Vector2(37, 272);
+            _barragolderecha=Content.Load<Texture2D>("p");
+            _barragolderechaPosition = new Vector2(1220,272);
+            
 
 
         }
@@ -139,6 +148,8 @@ namespace Project1
                 Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 250);
                 Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1);
                 Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 40);
+                Rectangle lineagolizquierda = new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 10, 100);
+                Rectangle lineagolderecha = new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,10,100);
 
                 // Se utiliza para poder recibir el estado del teclado.
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -226,13 +237,17 @@ namespace Project1
                     _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
 
                 }
-
+                if (bochaRectangle.Intersects(lineagolizquierda)) {
+                    _bochaSpeed *=0;
+                }
+                if (bochaRectangle.Intersects(lineagolderecha)) {
+                    _bochaSpeed *= 0;
+                }
                 _bochaPosition.X += _bochaSpeed.X;
                 _bochaSpeed *= friccion1;
-
                 _p1Position.X += _p1Speed.X;
-                _p1Speed *= friccion;
-
+                    _p1Speed *= friccion;
+                
 
 
 
@@ -379,6 +394,7 @@ namespace Project1
                     _bochaPosition += pushDirection * pushAmount;
 
                 }
+             
             }
             base.Update(gameTime); 
         }
@@ -418,12 +434,14 @@ namespace Project1
 
                 _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.White);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
-                _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 450), Color.Transparent);
+                _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 447), Color.Transparent);
                 _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
-                _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Transparent);
+                _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Red);
                 _spriteBatch.Draw(_barraderechaarco, new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 30, 192), Color.Transparent);
                 _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1), Color.Transparent);
                 _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 1), Color.Transparent);
+                _spriteBatch.Draw(_barragolizquierda, new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 30, 175), Color.Red);
+                _spriteBatch.Draw(_barragolderecha, new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,30,170),Color.Red);
             }
 
 
