@@ -51,6 +51,10 @@ namespace Project1
         private Vector2 _barragolizquierdaPosition;
         private Texture2D _barragolderecha;
         private Vector2 _barragolderechaPosition;
+        private int equipo1 = 0;
+        private int equipo2 = 0;
+        private Texture2D _fondo4;
+       
 
 
 
@@ -76,20 +80,21 @@ namespace Project1
             _backgroundTexture = Content.Load<Texture2D>("fondo");
             _menu = Content.Load<Texture2D>("fondo2");
             _personajes = Content.Load<Texture2D>("personajes");
+           
             // Permite calcular los graficos(?)
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // Carga la textura "pruebas" en la variable.
             _p1Texture = Content.Load<Texture2D>("a");
             // Define la posición de inicio del sprite "pruebas".
-            _p1Position = new Vector2(500, 200);
+            _p1Position = new Vector2(321, 340);
 
 
             // Carga las textura "manzana" en la variable.
             _p2Texture = Content.Load<Texture2D>("c");
             // (?)
-            _p2Position = new Vector2(100, 100);
+            _p2Position = new Vector2(921, 340);
             _bochaTexture = Content.Load<Texture2D>("bocha5");
-            _bochaPosition = new Vector2(379, 219);
+            _bochaPosition = new Vector2(621, 340);
             _bochaSpeed = new Vector2(0, 0);
             _barraizquierda = Content.Load<Texture2D>("p");
             _barraderecha = Content.Load<Texture2D>("p");
@@ -107,7 +112,8 @@ namespace Project1
             _barragolizquierdaPosition = new Vector2(37, 272);
             _barragolderecha=Content.Load<Texture2D>("p");
             _barragolderechaPosition = new Vector2(1220,272);
-            
+           
+
 
 
         }
@@ -238,10 +244,26 @@ namespace Project1
 
                 }
                 if (bochaRectangle.Intersects(lineagolizquierda)) {
+                    equipo2 = equipo2 + 1;
                     _bochaSpeed *=0;
+                    _p1Position.X = 321;
+                    _p1Position.Y = 340;
+                    _p2Position.X = 921;
+                    _p2Position.Y = 340;
+                    _bochaPosition.X = 621;
+                    _bochaPosition.Y = 340;
+                   
+                    
                 }
                 if (bochaRectangle.Intersects(lineagolderecha)) {
+                    equipo1 = equipo1 + 1;
                     _bochaSpeed *= 0;
+                    _p1Position.X = 321;
+                    _p1Position.Y = 340;
+                    _p2Position.X = 921;
+                    _p2Position.Y = 340;
+                    _bochaPosition.X = 621;
+                    _bochaPosition.Y = 340;
                 }
                 _bochaPosition.X += _bochaSpeed.X;
                 _bochaSpeed *= friccion1;
@@ -394,6 +416,7 @@ namespace Project1
                     _bochaPosition += pushDirection * pushAmount;
 
                 }
+
              
             }
             base.Update(gameTime); 
@@ -426,6 +449,16 @@ namespace Project1
 
             }
             else if (pantalla==3) {
+                
+                string resul=Convert.ToString(equipo1);
+
+                Vector2 posicion = new Vector2(400,35);
+                Color color = Color.Red;
+
+                string resul2= Convert.ToString(equipo2);
+                Vector2 posicion2 = new Vector2(900, 35);
+                Color color2 = Color.Red;
+                
 
 
 
@@ -434,6 +467,8 @@ namespace Project1
 
                 _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.White);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
+                _spriteBatch.DrawString(myFont, resul, posicion, color);
+                _spriteBatch.DrawString(myFont, resul2, posicion2, color2);
                 _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 447), Color.Transparent);
                 _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
                 _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Red);
