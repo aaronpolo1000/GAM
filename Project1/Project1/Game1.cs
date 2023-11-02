@@ -43,6 +43,23 @@ namespace Project1
         private SpriteFont myFont;
         private Texture2D _river;
         private Vector2 _riverPosition;
+        private Texture2D _boca;
+        private Vector2 _bocaPosition;
+        private Texture2D _racing;
+        private Vector2 _racingPosition;
+        private Texture2D _independiente;
+        private Vector2 _independientePosition;
+        private Texture2D _riverjuga;
+        private Vector2 _riverjugaPosition;
+        private Texture2D _tevez;
+        private Vector2 _tevezPosition;
+        private Texture2D _racingjuga;
+        private Vector2 _racingjugaPosition;
+        private Texture2D _rojojuga;
+        private Vector2 _rojojugaPosition; 
+        private enum Team { River, Boca, Racing, Independiente }
+        private Team _selectedTeam = Team.River;
+        private KeyboardState _previousKeyboardState;
 
         private Vector2 _barraizquierdaPositionarco;
         private Texture2D _barraderechaarco;
@@ -54,6 +71,8 @@ namespace Project1
         private int equipo1 = 0;
         private int equipo2 = 0;
         private Texture2D _fondo4;
+        private Texture2D _contador;
+        private Vector2 _contadorPosition;
        
 
 
@@ -74,8 +93,24 @@ namespace Project1
 
         protected override void LoadContent()
         {
-            _river =Content.Load<Texture2D>("river2");
+            _contador = Content.Load<Texture2D>("contador2");
+            _contadorPosition = new Vector2(600,-80);
+            _riverjuga = Content.Load<Texture2D>("riverjuga");
+            _riverjugaPosition = new Vector2(200, 400);
+            _tevez = Content.Load<Texture2D>("tevez");
+            _tevezPosition = new Vector2(200, 400);
+            _racingjuga = Content.Load<Texture2D>("racingjuga");
+            _racingjugaPosition = new Vector2(200, 400);
+            _rojojuga = Content.Load<Texture2D>("rojo");
+            _rojojugaPosition = new Vector2(200, 400);
+            _river =Content.Load<Texture2D>("river");
             _riverPosition =new Vector2(200,100);
+            _boca = Content.Load<Texture2D>("boca");
+            _bocaPosition = new Vector2(300, 100);
+            _racing = Content.Load<Texture2D>("racing");
+            _racingPosition = new Vector2(400, 100);
+            _independiente = Content.Load<Texture2D>("independiente");
+            _independientePosition = new Vector2(500, 100);
             myFont = Content.Load<SpriteFont>("borja");
             _backgroundTexture = Content.Load<Texture2D>("fondo");
             _menu = Content.Load<Texture2D>("fondo2");
@@ -90,7 +125,7 @@ namespace Project1
 
 
             // Carga las textura "manzana" en la variable.
-            _p2Texture = Content.Load<Texture2D>("c");
+            _p2Texture = Content.Load<Texture2D>("a");
             // (?)
             _p2Position = new Vector2(921, 340);
             _bochaTexture = Content.Load<Texture2D>("bocha5");
@@ -134,12 +169,36 @@ namespace Project1
 
 
                 Rectangle river = new Rectangle((int)_riverPosition.X, (int)_riverPosition.Y, 200, 200);
+                Rectangle boca = new Rectangle((int)_bocaPosition.X, (int)_bocaPosition.Y, 200, 200);
+                Rectangle racing = new Rectangle((int)_racingPosition.X, (int)_racingPosition.Y, 200, 200);
+                Rectangle independiente = new Rectangle((int)_independientePosition.X, (int)_independientePosition.Y, 200, 200);
                 KeyboardState inicio2 = Keyboard.GetState();
+                KeyboardState keyboardState = Keyboard.GetState();
+                if (keyboardState.IsKeyDown(Keys.Right) && !_previousKeyboardState.IsKeyDown(Keys.Right))
+                {
+                    // Cambia al siguiente equipo
+                    if (_selectedTeam == Team.River) _selectedTeam = Team.Boca;
+                    else if (_selectedTeam == Team.Boca) _selectedTeam = Team.Racing;
+                    else if (_selectedTeam == Team.Racing) _selectedTeam = Team.Independiente;
+                    else if (_selectedTeam == Team.Independiente) _selectedTeam = Team.River;
+
+                }
+
+                if (keyboardState.IsKeyDown(Keys.Left) && !_previousKeyboardState.IsKeyDown(Keys.Left))
+                {
+                    // Cambia al equipo anterior
+                    if (_selectedTeam == Team.River) _selectedTeam = Team.Independiente;
+                    else if (_selectedTeam == Team.Boca) _selectedTeam = Team.River;
+                    else if (_selectedTeam == Team.Racing) _selectedTeam = Team.Boca;
+                    else if (_selectedTeam == Team.Independiente) _selectedTeam = Team.Racing;
+
+                }
                 if (inicio2.IsKeyDown(Keys.D))
                 {
                     pantalla = 3;
 
                 }
+                _previousKeyboardState = keyboardState;
 
             }
             else if (pantalla == 3)
@@ -153,9 +212,9 @@ namespace Project1
                 Rectangle lineaRectangle = new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 10, 250);
                 Rectangle linea2Rectangle = new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 1, 250);
                 Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1);
-                Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 40);
-                Rectangle lineagolizquierda = new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 10, 100);
-                Rectangle lineagolderecha = new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,10,100);
+                Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 140);
+                Rectangle lineagolizquierda = new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 10, 200);
+                Rectangle lineagolderecha = new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,10,200);
 
                 // Se utiliza para poder recibir el estado del teclado.
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -327,7 +386,7 @@ namespace Project1
                 {
                     _p2Speed.X = 0; _p2movimiento = true;
                 }
-                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
+                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
                 {
 
                     {
@@ -357,7 +416,7 @@ namespace Project1
                     _p2Speed.Y = 0; _p2movimiento = true;
                 }
 
-                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.Q))
+                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
                 {
 
                     {
@@ -443,8 +502,27 @@ namespace Project1
             else if (pantalla == 2)
             {
                 _spriteBatch.Draw(_personajes, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                _spriteBatch.Draw(_river, new Rectangle((int)_riverPosition.X,(int)_riverPosition.Y,90,90), Color.White);
+                _spriteBatch.Draw(_river, new Rectangle((int)_riverPosition.X,(int)_riverPosition.Y,90,90), _selectedTeam == Team.River ? Color.Red : Color.White);
+                _spriteBatch.Draw(_boca, new Rectangle((int)_bocaPosition.X, (int)_bocaPosition.Y, 90, 90), _selectedTeam == Team.Boca ? Color.Red : Color.White);
+                _spriteBatch.Draw(_racing, new Rectangle((int)_racingPosition.X, (int)_racingPosition.Y, 90, 90), _selectedTeam == Team.Racing ? Color.Red : Color.White);
+                _spriteBatch.Draw(_independiente, new Rectangle((int)_independientePosition.X, (int)_independientePosition.Y, 90, 90), _selectedTeam == Team.Independiente ? Color.Red : Color.White);
 
+                if (_selectedTeam == Team.River)
+                {
+                    _spriteBatch.Draw(_riverjuga, new Rectangle((int)_riverjugaPosition.X, (int)_riverjugaPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam == Team.Boca)
+                {
+                    _spriteBatch.Draw(_tevez, new Rectangle((int)_tevezPosition.X, (int)_tevezPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam == Team.Racing)
+                {
+                    _spriteBatch.Draw(_racingjuga, new Rectangle((int)_racingjugaPosition.X, (int)_racingjugaPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam == Team.Independiente)
+                {
+                    _spriteBatch.Draw(_rojojuga, new Rectangle((int)_rojojugaPosition.X, (int)_rojojugaPosition.Y, 180, 180), Color.White);
+                }
 
 
             }
@@ -458,17 +536,18 @@ namespace Project1
                 string resul2= Convert.ToString(equipo2);
                 Vector2 posicion2 = new Vector2(900, 35);
                 Color color2 = Color.Red;
-                
 
 
 
+             
                 _spriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(_p1Texture, new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 45, 45), Color.White);
 
-                _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.White);
+                _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.BlueViolet);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
                 _spriteBatch.DrawString(myFont, resul, posicion, color);
                 _spriteBatch.DrawString(myFont, resul2, posicion2, color2);
+                _spriteBatch.Draw(_contador, new Rectangle((int)_contadorPosition.X, (int)_contadorPosition.Y, 150, 150), Color.White);
                 _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 447), Color.Transparent);
                 _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
                 _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Red);
