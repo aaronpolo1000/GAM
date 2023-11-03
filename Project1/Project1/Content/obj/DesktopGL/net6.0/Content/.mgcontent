@@ -21,6 +21,8 @@
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/independiente.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/k.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/l.png</File>
+    <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/marcador7.png</File>
+    <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/marcador8.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/messi.jpg</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/p.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/personajes.jpg</File>
@@ -32,6 +34,8 @@
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/tevez.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

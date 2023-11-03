@@ -93,8 +93,8 @@ namespace Project1
 
         protected override void LoadContent()
         {
-            _contador = Content.Load<Texture2D>("contador2");
-            _contadorPosition = new Vector2(600,-80);
+            _contador = Content.Load<Texture2D>("marcador8");
+            _contadorPosition = new Vector2(443,0);
             _riverjuga = Content.Load<Texture2D>("riverjuga");
             _riverjugaPosition = new Vector2(200, 400);
             _tevez = Content.Load<Texture2D>("tevez");
@@ -530,11 +530,11 @@ namespace Project1
                 
                 string resul=Convert.ToString(equipo1);
 
-                Vector2 posicion = new Vector2(400,35);
+                Vector2 posicion = new Vector2(477,35);
                 Color color = Color.Red;
 
                 string resul2= Convert.ToString(equipo2);
-                Vector2 posicion2 = new Vector2(900, 35);
+                Vector2 posicion2 = new Vector2(800, 35);
                 Color color2 = Color.Red;
 
 
@@ -545,9 +545,9 @@ namespace Project1
 
                 _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.BlueViolet);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
+                _spriteBatch.Draw(_contador, new Rectangle((int)_contadorPosition.X, (int)_contadorPosition.Y, 390, 60), Color.White);
                 _spriteBatch.DrawString(myFont, resul, posicion, color);
-                _spriteBatch.DrawString(myFont, resul2, posicion2, color2);
-                _spriteBatch.Draw(_contador, new Rectangle((int)_contadorPosition.X, (int)_contadorPosition.Y, 150, 150), Color.White);
+                _spriteBatch.DrawString(myFont, resul2, posicion2, color2);               
                 _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 447), Color.Transparent);
                 _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
                 _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Red);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/racingjuga.png</SourceFile>
-  <SourceTime>2023-11-02T14:50:51.6216094-03:00</SourceTime>
+  <SourceTime>2023-11-03T13:23:14.8841426-03:00</SourceTime>
   <DestFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/racingjuga.xnb</DestFile>
-  <DestTime>2023-11-02T14:52:59.5306633-03:00</DestTime>
+  <DestTime>2023-11-03T13:45:18.1153207-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T08:44:56-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
