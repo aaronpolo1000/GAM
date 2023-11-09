@@ -73,7 +73,11 @@ namespace Project1
         private Texture2D _fondo4;
         private Texture2D _contador;
         private Vector2 _contadorPosition;
-       
+        private bool pausa = false;
+        private Texture2D _pausa;
+        private Vector2 _pausaPosition;
+      
+
 
 
 
@@ -93,6 +97,9 @@ namespace Project1
 
         protected override void LoadContent()
         {
+          
+            _pausa=Content.Load<Texture2D>("pausa5");
+            _pausaPosition = new Vector2(443,290);
             _contador = Content.Load<Texture2D>("marcador8");
             _contadorPosition = new Vector2(443,0);
             _riverjuga = Content.Load<Texture2D>("riverjuga");
@@ -203,6 +210,8 @@ namespace Project1
             }
             else if (pantalla == 3)
             {
+              
+                KeyboardState inicio3 = Keyboard.GetState();
                 Rectangle pruebasRectangle = new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 30, 30);
                 // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
                 Rectangle manzanaRectangle = new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 30, 30);
@@ -223,7 +232,7 @@ namespace Project1
                 float friccion1 = 0.99f;
                 float friccion = 0.6f;
                 Vector2 velocidad = new Vector2(2f, 2f);
-                if (bochaRectangle.Intersects(linea3Rectangle))
+                if (bochaRectangle.Intersects(linea3Rectangle) )
                 {
                     Vector2 normal = Vector2.Normalize(new Vector2(linea3Rectangle.X - bochaRectangle.X, linea3Rectangle.Y - bochaRectangle.Y));
 
@@ -274,13 +283,13 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.Left))
+                if (keyboardState.IsKeyDown(Keys.Left) && pausa==false)
                 {
                     _p1Speed.X -= 2;
                     _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Right))
+                else if (keyboardState.IsKeyDown(Keys.Right) && pausa == false)
                 {
 
 
@@ -324,20 +333,23 @@ namespace Project1
                     _bochaPosition.X = 621;
                     _bochaPosition.Y = 340;
                 }
-                _bochaPosition.X += _bochaSpeed.X;
-                _bochaSpeed *= friccion1;
+                if (pausa == false)
+                {
+                    _bochaPosition.X += _bochaSpeed.X;
+                    _bochaSpeed *= friccion1;
+                }
                 _p1Position.X += _p1Speed.X;
                     _p1Speed *= friccion;
                 
 
 
 
-                if (keyboardState.IsKeyDown(Keys.Up))
+                if (keyboardState.IsKeyDown(Keys.Up) && pausa == false)
                 {
                     _p1Speed.Y -= 2; _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Down))
+                else if (keyboardState.IsKeyDown(Keys.Down) && pausa == false)
                 {
 
 
@@ -356,8 +368,11 @@ namespace Project1
                     _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
 
                 }
-                _bochaPosition.Y += _bochaSpeed.Y;
-                _bochaSpeed *= friccion1;
+                if (pausa == false)
+                {
+                    _bochaPosition.Y += _bochaSpeed.Y;
+                    _bochaSpeed *= friccion1;
+                }
                 _p1Position.Y += _p1Speed.Y;
                 _p1Speed *= friccion;
 
@@ -371,12 +386,12 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.A))
+                if (keyboardState.IsKeyDown(Keys.A) && pausa == false)
                 {
                     _p2Speed.X -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.D))
+                else if (keyboardState.IsKeyDown(Keys.D) && pausa == false)
                 {
 
 
@@ -393,19 +408,21 @@ namespace Project1
                         _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
                     }
                 }
-
-                _bochaPosition.X += _bochaSpeed.X;
-                _bochaSpeed *= friccion1;
+                if (pausa == false)
+                {
+                    _bochaPosition.X += _bochaSpeed.X;
+                    _bochaSpeed *= friccion1;
+                }
                 _p2Position.X += _p2Speed.X;
                 _p2Speed *= friccion;
 
 
-                if (keyboardState.IsKeyDown(Keys.W))
+                if (keyboardState.IsKeyDown(Keys.W) && pausa == false)
                 {
                     _p2Speed.Y -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.S))
+                else if (keyboardState.IsKeyDown(Keys.S) && pausa == false)
                 {
 
 
@@ -423,9 +440,13 @@ namespace Project1
                         _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
                     }
                 }
-                _bochaPosition.Y += _bochaSpeed.Y;
-                _bochaSpeed *= friccion1;
-                _p2Position.Y += _p2Speed.Y;
+
+                if (pausa == false)
+                {
+                    _bochaPosition.Y += _bochaSpeed.Y;
+                    _bochaSpeed *= friccion1;
+                }
+                    _p2Position.Y += _p2Speed.Y;
                 _p2Speed *= friccion;
                 if (pruebasRectangle.Intersects(manzanaRectangle))
                 {
@@ -474,6 +495,20 @@ namespace Project1
                     const float pushAmount = 4f; // Ajusta según tus necesidades
                     _bochaPosition += pushDirection * pushAmount;
 
+                }
+                if (inicio3.IsKeyDown(Keys.Escape)) {
+                    pausa = true;
+                    
+                
+                }
+                if (pausa==true) {
+                    if (inicio3.IsKeyDown(Keys.Q))
+                    {
+                        pausa = false;
+
+                    }
+                   
+                    
                 }
 
              
@@ -556,6 +591,14 @@ namespace Project1
                 _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 1), Color.Transparent);
                 _spriteBatch.Draw(_barragolizquierda, new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 30, 175), Color.Red);
                 _spriteBatch.Draw(_barragolderecha, new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,30,170),Color.Red);
+
+                if (pausa == true) {
+                    _spriteBatch.Draw(_pausa, new Rectangle((int)_pausaPosition.X, (int)_pausaPosition.Y, 200, 200),Color.White);
+                   
+
+
+                }
+
             }
 
 

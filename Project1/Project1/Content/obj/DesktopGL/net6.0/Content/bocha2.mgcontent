@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha2.jpg</SourceFile>
-  <SourceTime>2023-11-03T13:23:14.8685213-03:00</SourceTime>
+  <SourceTime>2023-11-09T14:00:36.6787767-03:00</SourceTime>
   <DestFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/bocha2.xnb</DestFile>
-  <DestTime>2023-11-03T13:45:17.5508002-03:00</DestTime>
+  <DestTime>2023-11-09T15:22:57.9340277-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T08:44:56-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

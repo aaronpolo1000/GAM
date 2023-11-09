@@ -171,3 +171,6 @@ C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\contador2.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\marcador5.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\marcador7.xnb
 C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\marcador8.xnb
+C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\pausa3.xnb
+C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\pausa5.xnb
+C:\xampp\htdocs\GAM\Project1\Project1\bin\Debug\net6.0\Content\bocaf.xnb

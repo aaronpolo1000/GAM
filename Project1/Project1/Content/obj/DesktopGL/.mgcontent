@@ -7,6 +7,7 @@
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/a.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/b.jpg</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/boca.png</File>
+    <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/bocaf.gif</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha2.jpg</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha3.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/bocha4.png</File>
@@ -25,6 +26,8 @@
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/marcador8.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/messi.jpg</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/p.png</File>
+    <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/pausa3.png</File>
+    <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/pausa5.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/personajes.jpg</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/racing.png</File>
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/racingjuga.png</File>
@@ -34,6 +37,9 @@
     <File>C:/xampp/htdocs/GAM/Project1/Project1/Content/tevez.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
