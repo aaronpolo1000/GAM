@@ -59,6 +59,8 @@ namespace Project1
         private Vector2 _rojojugaPosition; 
         private enum Team { River, Boca, Racing, Independiente }
         private Team _selectedTeam = Team.River;
+     
+        private Team _selectedTeam2 = Team.Boca;
         private KeyboardState _previousKeyboardState;
 
         private Vector2 _barraizquierdaPositionarco;
@@ -76,7 +78,27 @@ namespace Project1
         private bool pausa = false;
         private Texture2D _pausa;
         private Vector2 _pausaPosition;
-      
+        private Texture2D _final;
+        private Vector2 _finalPosition;
+        private int elegido;
+        private int elegido2;
+        private float contadorSegundos = 0.0f;
+        private float contadorSegundos2 = 0.0f;
+        private DateTime tiempo, tiempoActual;
+        private DateTime tiempo1, tiempoActual1;
+        private TimeSpan dif;
+        private DateTime tiempo2, tiempoActual2;
+        private TimeSpan dif2, dif4;
+        private bool estado2 = true, si2 = false;
+
+        private TimeSpan dif1;
+        private bool estado = true, si = false;
+        private DateTime tiempo3, tiempoActual3;
+        private TimeSpan dif3;
+        private bool tiempoestado = true;
+        private bool final = true;
+        private string nombrequip1;
+        private string nombrequip2;
 
 
 
@@ -100,6 +122,8 @@ namespace Project1
           
             _pausa=Content.Load<Texture2D>("pausa5");
             _pausaPosition = new Vector2(443,290);
+            _final = Content.Load<Texture2D>("final");
+            _finalPosition = new Vector2(450, 180);
             _contador = Content.Load<Texture2D>("marcador8");
             _contadorPosition = new Vector2(443,0);
             _riverjuga = Content.Load<Texture2D>("riverjuga");
@@ -181,6 +205,27 @@ namespace Project1
                 Rectangle independiente = new Rectangle((int)_independientePosition.X, (int)_independientePosition.Y, 200, 200);
                 KeyboardState inicio2 = Keyboard.GetState();
                 KeyboardState keyboardState = Keyboard.GetState();
+
+                if (keyboardState.IsKeyDown(Keys.D) && !_previousKeyboardState.IsKeyDown(Keys.D))
+                {
+                    // Cambia al siguiente equipo
+                    if (_selectedTeam2 == Team.River) _selectedTeam2 = Team.Boca;
+                    else if (_selectedTeam2 == Team.Boca) _selectedTeam2 = Team.Racing;
+                    else if (_selectedTeam2 == Team.Racing) _selectedTeam2 = Team.Independiente;
+                    else if (_selectedTeam2 == Team.Independiente) _selectedTeam2 = Team.River;
+
+                }
+
+                if (keyboardState.IsKeyDown(Keys.A) && !_previousKeyboardState.IsKeyDown(Keys.A))
+                {
+                    // Cambia al equipo anterior
+                    if (_selectedTeam2 == Team.River) _selectedTeam2 = Team.Independiente;
+                    else if (_selectedTeam2 == Team.Boca) _selectedTeam2 = Team.River;
+                    else if (_selectedTeam2 == Team.Racing) _selectedTeam2 = Team.Boca;
+                    else if (_selectedTeam2 == Team.Independiente) _selectedTeam2 = Team.Racing;
+
+                }
+
                 if (keyboardState.IsKeyDown(Keys.Right) && !_previousKeyboardState.IsKeyDown(Keys.Right))
                 {
                     // Cambia al siguiente equipo
@@ -200,8 +245,47 @@ namespace Project1
                     else if (_selectedTeam == Team.Independiente) _selectedTeam = Team.Racing;
 
                 }
-                if (inicio2.IsKeyDown(Keys.D))
+                if (inicio2.IsKeyDown(Keys.P))
                 {
+                    if (_selectedTeam == Team.River)
+                    {
+                        elegido = 1;
+                        nombrequip1 = "RIVER";
+                    }
+                    if (_selectedTeam == Team.Boca)
+                    {
+                        elegido = 1;
+                        nombrequip1 = "BOCA";
+                    }
+                    if (_selectedTeam == Team.Racing)
+                    {
+                        elegido = 1;
+                        nombrequip1 = "RACING";
+                    }
+                    if (_selectedTeam == Team.Independiente)
+                    {
+                        elegido = 1;
+                        nombrequip1 = "IND";
+                    }
+                    if (_selectedTeam2 ==Team.River) {
+                        elegido2 = 1;
+                        nombrequip2 = "RIVER";
+                    }
+                    if (_selectedTeam2 == Team.Boca)
+                    {
+                        elegido2 = 1;
+                        nombrequip2 = "BOCA";
+                    }
+                    if (_selectedTeam2 == Team.Racing)
+                    {
+                        elegido2 = 1;
+                        nombrequip2 = "RACING";
+                    }
+                    if (_selectedTeam2 == Team.Independiente)
+                    {
+                        elegido2 = 1;
+                        nombrequip2 = "IND";
+                    }
                     pantalla = 3;
 
                 }
@@ -210,7 +294,14 @@ namespace Project1
             }
             else if (pantalla == 3)
             {
-              
+                if (tiempoestado)
+                {
+                    tiempo3 = DateTime.Now;
+                    tiempoActual3 = DateTime.Now;
+                    tiempoestado = false;
+                }
+                tiempoActual3 = DateTime.Now;
+                dif3= tiempoActual3 - tiempo3;
                 KeyboardState inicio3 = Keyboard.GetState();
                 Rectangle pruebasRectangle = new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 30, 30);
                 // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
@@ -279,17 +370,86 @@ namespace Project1
                 }
 
 
+                if (elegido==1)
+                {
+
+                    if (estado)
+                    {
+                        if (!si)
+                        {
+                          
+                            Debug.Write("hola");
+                            tiempo = DateTime.Now;
+                            tiempoActual = DateTime.Now;
+
+                            si = true;
+
+                        }
+                        tiempoActual = DateTime.Now;
+                        dif = tiempoActual - tiempo;
+                        Debug.Write(dif.TotalSeconds.ToString());
+                        if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
+                        {
+                            _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
+
+                        }
+                        if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
+                        {
+
+                            
+                                _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
+                            
+                        }
+
+                        if (dif.Seconds == 30)
+                        {
+                            dif = tiempoActual - tiempoActual;
+                            si = false;
+                            estado = false;
+                        }
+                    }
+                    if (!estado)
+                    {
+                        Debug.Write("fino");
+                        if (!si)
+                        {
+                            tiempo1 = DateTime.Now;
+                            tiempoActual1 = DateTime.Now;
+
+                            si = true;
+                        }
+                        tiempoActual1 = DateTime.Now;
+                        dif1 = tiempoActual1 - tiempo1;
+                        if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
+                        {
+                            _bochaSpeed = Vector2.Normalize(_p1Speed) * 10;
+                        }
+                        if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
+                        {
+
+                            
+                                _bochaSpeed = Vector2.Normalize(_p2Speed) * 10;
+                            
+                        }
+                        if (dif1.Seconds == 10)
+                        {
+                            dif1 = tiempoActual1 - tiempoActual1;
+                            si = false;
+                            estado = true;
+                        }
+                    }
+                }
+               
 
 
 
-
-                if (keyboardState.IsKeyDown(Keys.Left) && pausa==false)
+                if (keyboardState.IsKeyDown(Keys.Left) && pausa==false && final == true)
                 {
                     _p1Speed.X -= 2;
                     _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Right) && pausa == false)
+                else if (keyboardState.IsKeyDown(Keys.Right) && pausa == false && final == true)
                 {
 
 
@@ -305,12 +465,7 @@ namespace Project1
 
 
 
-                if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
-                {
-
-                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
-
-                }
+              
                 if (bochaRectangle.Intersects(lineagolizquierda)) {
                     equipo2 = equipo2 + 1;
                     _bochaSpeed *=0;
@@ -333,10 +488,11 @@ namespace Project1
                     _bochaPosition.X = 621;
                     _bochaPosition.Y = 340;
                 }
-                if (pausa == false)
+                if (pausa == false || final==true)
                 {
                     _bochaPosition.X += _bochaSpeed.X;
                     _bochaSpeed *= friccion1;
+                    
                 }
                 _p1Position.X += _p1Speed.X;
                     _p1Speed *= friccion;
@@ -344,12 +500,12 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.Up) && pausa == false)
+                if (keyboardState.IsKeyDown(Keys.Up) && pausa == false && final == true)
                 {
                     _p1Speed.Y -= 2; _p1movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.Down) && pausa == false)
+                else if (keyboardState.IsKeyDown(Keys.Down) && pausa == false && final == true)
                 {
 
 
@@ -362,13 +518,8 @@ namespace Project1
 
 
 
-                if (bochaRectangle.Intersects(pruebasRectangle) && !_p1movimiento && keyboardState.IsKeyDown(Keys.P))
-                {
-
-                    _bochaSpeed = Vector2.Normalize(_p1Speed) * 4;
-
-                }
-                if (pausa == false)
+          
+                    if (pausa == false|| final==true)
                 {
                     _bochaPosition.Y += _bochaSpeed.Y;
                     _bochaSpeed *= friccion1;
@@ -386,12 +537,12 @@ namespace Project1
 
 
 
-                if (keyboardState.IsKeyDown(Keys.A) && pausa == false)
+                if (keyboardState.IsKeyDown(Keys.A) && pausa == false && final == true)
                 {
                     _p2Speed.X -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.D) && pausa == false)
+                else if (keyboardState.IsKeyDown(Keys.D) && pausa == false && final == true)
                 {
 
 
@@ -401,14 +552,8 @@ namespace Project1
                 {
                     _p2Speed.X = 0; _p2movimiento = true;
                 }
-                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
-                {
-
-                    {
-                        _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
-                    }
-                }
-                if (pausa == false)
+               
+                if (pausa == false || final == true)
                 {
                     _bochaPosition.X += _bochaSpeed.X;
                     _bochaSpeed *= friccion1;
@@ -417,12 +562,12 @@ namespace Project1
                 _p2Speed *= friccion;
 
 
-                if (keyboardState.IsKeyDown(Keys.W) && pausa == false)
+                if (keyboardState.IsKeyDown(Keys.W) && pausa == false && final==true)
                 {
                     _p2Speed.Y -= 2; _p2movimiento = false;
                 }
 
-                else if (keyboardState.IsKeyDown(Keys.S) && pausa == false)
+                else if (keyboardState.IsKeyDown(Keys.S) && pausa == false && final == true)
                 {
 
 
@@ -433,15 +578,9 @@ namespace Project1
                     _p2Speed.Y = 0; _p2movimiento = true;
                 }
 
-                if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
-                {
+               
 
-                    {
-                        _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
-                    }
-                }
-
-                if (pausa == false)
+                if (pausa == false || final == true)
                 {
                     _bochaPosition.Y += _bochaSpeed.Y;
                     _bochaSpeed *= friccion1;
@@ -507,8 +646,17 @@ namespace Project1
                         pausa = false;
 
                     }
+                    if (inicio3.IsKeyDown(Keys.P)) {
+                        Exit();
+                    }
                    
                     
+                }
+                if (final==false) {
+                    if (inicio3.IsKeyDown(Keys.Escape)) {
+                        Exit();
+                    }
+                
                 }
 
              
@@ -528,7 +676,7 @@ namespace Project1
             {
                 _spriteBatch.Draw(_menu, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 string texto = "PRESIONE ENTER PARA INICIAR";
-                Vector2 posicion = new Vector2(290, 380);
+                Vector2 posicion = new Vector2(490, 600);
                 Color color = Color.White;
 
                 _spriteBatch.DrawString(myFont, texto, posicion, color);
@@ -536,12 +684,24 @@ namespace Project1
 
             else if (pantalla == 2)
             {
+                string cont9 = "Presione P para continuar.";
+                Vector2 posicio9 = new Vector2(550, 80);
+                Color color9 = Color.White;
+                string contk = "Nota:Cada 30 segundos habra un lapso de tiempo en el cual la potencia de disparo se aumentara en ambos jugadores por 10 segundos.";
+                Vector2 posiciok = new Vector2(150, 600);
+                Color colork = Color.White;
+
                 _spriteBatch.Draw(_personajes, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(_river, new Rectangle((int)_riverPosition.X,(int)_riverPosition.Y,90,90), _selectedTeam == Team.River ? Color.Red : Color.White);
                 _spriteBatch.Draw(_boca, new Rectangle((int)_bocaPosition.X, (int)_bocaPosition.Y, 90, 90), _selectedTeam == Team.Boca ? Color.Red : Color.White);
                 _spriteBatch.Draw(_racing, new Rectangle((int)_racingPosition.X, (int)_racingPosition.Y, 90, 90), _selectedTeam == Team.Racing ? Color.Red : Color.White);
                 _spriteBatch.Draw(_independiente, new Rectangle((int)_independientePosition.X, (int)_independientePosition.Y, 90, 90), _selectedTeam == Team.Independiente ? Color.Red : Color.White);
-
+                _spriteBatch.Draw(_river, new Rectangle(700, (int)_riverPosition.Y, 90, 90), _selectedTeam2 == Team.River ? Color.Blue : Color.White);
+                _spriteBatch.Draw(_boca, new Rectangle(800, (int)_bocaPosition.Y, 90, 90), _selectedTeam2 == Team.Boca ? Color.Blue : Color.White);
+                _spriteBatch.Draw(_racing, new Rectangle(900, (int)_racingPosition.Y, 90, 90), _selectedTeam2 == Team.Racing ? Color.Blue : Color.White);
+                _spriteBatch.Draw(_independiente, new Rectangle(1000, (int)_independientePosition.Y, 90, 90), _selectedTeam2 == Team.Independiente ? Color.Blue : Color.White);
+                _spriteBatch.DrawString(myFont, contk, posiciok, colork);
+                _spriteBatch.DrawString(myFont, cont9, posicio9, color9);
                 if (_selectedTeam == Team.River)
                 {
                     _spriteBatch.Draw(_riverjuga, new Rectangle((int)_riverjugaPosition.X, (int)_riverjugaPosition.Y, 180, 180), Color.White);
@@ -560,29 +720,68 @@ namespace Project1
                 }
 
 
+                
+
+                if (_selectedTeam2== Team.River)
+                {
+                    _spriteBatch.Draw(_riverjuga, new Rectangle(800, (int)_riverjugaPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam2 == Team.Boca)
+                {
+                    _spriteBatch.Draw(_tevez, new Rectangle(800, (int)_tevezPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam2 == Team.Racing)
+                {
+                    _spriteBatch.Draw(_racingjuga, new Rectangle(800, (int)_racingjugaPosition.Y, 180, 180), Color.White);
+                }
+                else if (_selectedTeam2 == Team.Independiente)
+                {
+                    _spriteBatch.Draw(_rojojuga, new Rectangle(800, (int)_rojojugaPosition.Y, 180, 180), Color.White);
+                }
+
+
             }
             else if (pantalla==3) {
-                
+                string conth = "Presione P para pausar";
+                Vector2 posicionh = new Vector2(1100, 35);
+                Color colorh = Color.White;
+                string  cont="Contador:"+Convert.ToString(dif3.Seconds);
+                Vector2 posicion4 = new Vector2(250, 35);
+                Color color4 = Color.White;
+
+
                 string resul=Convert.ToString(equipo1);
 
-                Vector2 posicion = new Vector2(477,35);
-                Color color = Color.Red;
+                Vector2 posicion = new Vector2(477,30);
+                Color color = Color.White;
 
                 string resul2= Convert.ToString(equipo2);
-                Vector2 posicion2 = new Vector2(800, 35);
-                Color color2 = Color.Red;
+                Vector2 posicion2 = new Vector2(800, 30);
+                Color color2 = Color.White;
+                string resulq = Convert.ToString(nombrequip1);
+
+                Vector2 posicionq = new Vector2(530, 30);
+                Color colorq = Color.White;
+                string resulz = Convert.ToString(nombrequip2);
+
+                Vector2 posicionz = new Vector2(705, 30);
+                Color colorz = Color.White;
 
 
 
-             
+
                 _spriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                _spriteBatch.Draw(_p1Texture, new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 45, 45), Color.White);
+                _spriteBatch.Draw(_p1Texture, new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 45, 45), _selectedTeam == Team.River ? Color.White : Color.Blue);
 
-                _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), Color.BlueViolet);
+                _spriteBatch.Draw(_p2Texture, new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 45, 45), _selectedTeam2 == Team.River ? Color.Red : Color.Blue);
                 _spriteBatch.Draw(_bochaTexture, new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 40, 40), Color.White);
                 _spriteBatch.Draw(_contador, new Rectangle((int)_contadorPosition.X, (int)_contadorPosition.Y, 390, 60), Color.White);
                 _spriteBatch.DrawString(myFont, resul, posicion, color);
-                _spriteBatch.DrawString(myFont, resul2, posicion2, color2);               
+                _spriteBatch.DrawString(myFont, resul2, posicion2, color2);
+                _spriteBatch.DrawString(myFont, cont, posicion4, color4);
+                _spriteBatch.DrawString(myFont, conth, posicionh, colorh);
+                _spriteBatch.DrawString(myFont, resulq, posicionq, colorq);
+                _spriteBatch.DrawString(myFont, resulz, posicionz, colorz);
                 _spriteBatch.Draw(_barraizquierdaarco, new Rectangle((int)_barraizquierdaPositionarco.X, (int)_barraizquierdaPositionarco.Y, 30, 447), Color.Transparent);
                 _spriteBatch.Draw(_barraizquierda, new Rectangle((int)_barraizquierdaPosition.X, (int)_barraizquierdaPosition.Y, 30, 192), Color.Transparent);
                 _spriteBatch.Draw(_barraderecha, new Rectangle((int)_barraderechaPosition.X, (int)_barraderechaPosition.Y, 30, 192), Color.Red);
@@ -598,7 +797,60 @@ namespace Project1
 
 
                 }
+                if (dif3.Seconds >= 120)
+                {
+                    string resuld = Convert.ToString(nombrequip1);
 
+                    Vector2 posiciond = new Vector2(550, 270);
+                    Color colord = Color.White;
+                    string resulv = Convert.ToString(nombrequip2);
+
+                    Vector2 posicionv = new Vector2(740, 270);
+                    Color colorv = Color.White;
+
+                    string resulb = Convert.ToString(equipo1);
+
+                    Vector2 posicionb = new Vector2(570, 330);
+                    Color colorb = Color.White;
+                    string resulc = Convert.ToString(equipo2);
+
+                    Vector2 posicionc = new Vector2(760, 330);
+                    Color colorc = Color.White;
+                    final = false;
+                    _spriteBatch.Draw(_final, new Rectangle((int)_finalPosition.X, (int)_finalPosition.Y, 450, 450), Color.White);
+                    _spriteBatch.DrawString(myFont, resulb, posicionb, colorb);
+                    _spriteBatch.DrawString(myFont, resulc, posicionc, colorc);
+                    _spriteBatch.DrawString(myFont, resuld, posiciond, colord);
+                    _spriteBatch.DrawString(myFont, resulv, posicionv, colorv);
+                }
+                if (equipo1==2 || equipo2==2)
+                {
+                    string resuld = Convert.ToString(nombrequip1);
+
+                    Vector2 posiciond = new Vector2(550, 270);
+                    Color colord = Color.White;
+                    string resulv = Convert.ToString(nombrequip2);
+
+                    Vector2 posicionv = new Vector2(740, 270);
+                    Color colorv = Color.White;
+
+                    string resulb = Convert.ToString(equipo1);
+
+                    Vector2 posicionb = new Vector2(570, 330);
+                    Color colorb = Color.White;
+                    string resulc = Convert.ToString(equipo2);
+
+                    Vector2 posicionc = new Vector2(760, 330);
+                    Color colorc = Color.White;
+                    final = false;
+                    _spriteBatch.Draw(_final, new Rectangle((int)_finalPosition.X, (int)_finalPosition.Y, 450, 450), Color.White);
+                    _spriteBatch.DrawString(myFont, resulb, posicionb, colorb);
+                    _spriteBatch.DrawString(myFont, resulc, posicionc, colorc);
+                    _spriteBatch.DrawString(myFont, resuld, posiciond, colord);
+                    _spriteBatch.DrawString(myFont, resulv, posicionv, colorv);
+
+                }
+                
             }
 
 
