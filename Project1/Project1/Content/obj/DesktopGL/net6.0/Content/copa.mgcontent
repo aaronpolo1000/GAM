@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/copa.webp</SourceFile>
-  <SourceTime>2023-11-26T11:30:18.7354569-03:00</SourceTime>
-  <DestFile>C:/xampp/htdocs/GAM/Project1/Project1/Content/bin/DesktopGL/Content/copa.xnb</DestFile>
-  <DestTime>2023-11-26T11:49:57.0522714-03:00</DestTime>
+  <SourceFile>C:/Users/aaron/source/repos/GAM/Project1/Project1/Content/copa.webp</SourceFile>
+  <SourceTime>2023-12-09T17:19:14.4935899-03:00</SourceTime>
+  <DestFile>C:/Users/aaron/source/repos/GAM/Project1/Project1/Content/bin/DesktopGL/Content/copa.xnb</DestFile>
+  <DestTime>2023-12-14T19:15:39.8632885-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T08:44:56-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
