@@ -10,26 +10,30 @@ namespace Project1
 {
     public class Game1 : Game
     {
-        
+
         private GraphicsDeviceManager _graphics;
         // Encarga de dibujar las texturas en pantalla.
         private SpriteBatch _spriteBatch;
-        // Crea la variable de textura 2D "pruebas".
-        private Texture2D _p1Texture;
-        // Crea la variable de posición de "pruebas"
-        private Vector2 _p1Position;
-        // Crea la variable de la velocidad en la que se moverá el sprite.
+
+        // Jugador 1
         private Vector2 _p1Speed = new Vector2(3, 3);
+        private Texture2D _p1Texture;
+        private Vector2 _p1Position;
+
+        //Jugador 2
         private Vector2 _p2Speed = new Vector2(3, 3);
         private Texture2D _p2Texture;
         private Vector2 _p2Position;
-        private Texture2D _backgroundTexture;
-        private Texture2D _menu;
-        private Texture2D _personajes;
-        private Texture2D _bochaTexture;
+
+
+        //Bocha(pelota)
         private Vector2 _bochaPosition;
-        private Vector2 _bochaSpeed= new Vector2(0,0);
-        private bool _bochatocada=false, a,b,c,d;
+        private Vector2 _bochaSpeed = new Vector2(0, 0);
+        private Texture2D _bochaTexture;
+
+
+        //Menu Partida
+        private Texture2D _backgroundTexture;
         private Texture2D _barraizquierda;
         private Texture2D _barraderecha;
         private Texture2D _barraabajo;
@@ -39,7 +43,41 @@ namespace Project1
         private Vector2 _barraabajoPosition;
         private Vector2 _barraizquierdaPosition;
         private Vector2 _barraderechaPosition;
+        private Vector2 _barraizquierdaPositionarco;
+        private Texture2D _barraderechaarco;
+        private Vector2 _barraderechaPositionarco;
+        private Texture2D _barragolizquierda;
+        private Vector2 _barragolizquierdaPosition;
+        private Texture2D _barragolderecha;
+        private Vector2 _barragolderechaPosition;
+        private int equipo1 = 0;
+        private int equipo2 = 0;
+        private Texture2D _contador;
+        private Vector2 _contadorPosition;
+        private bool pausa = false;
+        private Texture2D _pausa;
+        private Vector2 _pausaPosition;
+        private Texture2D _final;
+        private Vector2 _finalPosition;
+        private DateTime tiempo, tiempoActual;
+        private DateTime tiempo1, tiempoActual1;
+        private TimeSpan dif;
+        private TimeSpan dif1;
+        private bool estado = true, si = false;
+        private DateTime tiempo3, tiempoActual3;
+        private TimeSpan dif3;
+        private bool tiempoestado = true;
+        private bool final = true;
+        private string nombrequip1;
+        private string nombrequip2;
+
+
+        //Menu inicial
         private int pantalla = 1;
+
+        //Menu de personajes
+        private Texture2D _menu;
+        private Texture2D _personajes;
         private SpriteFont myFont;
         private Texture2D _river;
         private Vector2 _riverPosition;
@@ -56,49 +94,13 @@ namespace Project1
         private Texture2D _racingjuga;
         private Vector2 _racingjugaPosition;
         private Texture2D _rojojuga;
-        private Vector2 _rojojugaPosition; 
+        private Vector2 _rojojugaPosition;
         private enum Team { River, Boca, Racing, Independiente }
         private Team _selectedTeam = Team.River;
-     
         private Team _selectedTeam2 = Team.Boca;
         private KeyboardState _previousKeyboardState;
-
-        private Vector2 _barraizquierdaPositionarco;
-        private Texture2D _barraderechaarco;
-        private Vector2 _barraderechaPositionarco;
-        private Texture2D _barragolizquierda;
-        private Vector2 _barragolizquierdaPosition;
-        private Texture2D _barragolderecha;
-        private Vector2 _barragolderechaPosition;
-        private int equipo1 = 0;
-        private int equipo2 = 0;
-        private Texture2D _fondo4;
-        private Texture2D _contador;
-        private Vector2 _contadorPosition;
-        private bool pausa = false;
-        private Texture2D _pausa;
-        private Vector2 _pausaPosition;
-        private Texture2D _final;
-        private Vector2 _finalPosition;
         private int elegido;
         private int elegido2;
-        private float contadorSegundos = 0.0f;
-        private float contadorSegundos2 = 0.0f;
-        private DateTime tiempo, tiempoActual;
-        private DateTime tiempo1, tiempoActual1;
-        private TimeSpan dif;
-        private DateTime tiempo2, tiempoActual2;
-        private TimeSpan dif2, dif4;
-        private bool estado2 = true, si2 = false;
-
-        private TimeSpan dif1;
-        private bool estado = true, si = false;
-        private DateTime tiempo3, tiempoActual3;
-        private TimeSpan dif3;
-        private bool tiempoestado = true;
-        private bool final = true;
-        private string nombrequip1;
-        private string nombrequip2;
 
 
 
@@ -119,13 +121,13 @@ namespace Project1
 
         protected override void LoadContent()
         {
-          
-            _pausa=Content.Load<Texture2D>("pausa5");
-            _pausaPosition = new Vector2(443,290);
+            //Carga de textura menu personajes
+            _pausa = Content.Load<Texture2D>("pausa5");
+            _pausaPosition = new Vector2(443, 290);
             _final = Content.Load<Texture2D>("final");
             _finalPosition = new Vector2(450, 180);
             _contador = Content.Load<Texture2D>("marcador8");
-            _contadorPosition = new Vector2(443,0);
+            _contadorPosition = new Vector2(443, 0);
             _riverjuga = Content.Load<Texture2D>("riverjuga");
             _riverjugaPosition = new Vector2(200, 400);
             _tevez = Content.Load<Texture2D>("tevez");
@@ -134,8 +136,8 @@ namespace Project1
             _racingjugaPosition = new Vector2(200, 400);
             _rojojuga = Content.Load<Texture2D>("rojo");
             _rojojugaPosition = new Vector2(200, 400);
-            _river =Content.Load<Texture2D>("river");
-            _riverPosition =new Vector2(200,100);
+            _river = Content.Load<Texture2D>("river");
+            _riverPosition = new Vector2(200, 100);
             _boca = Content.Load<Texture2D>("boca");
             _bocaPosition = new Vector2(300, 100);
             _racing = Content.Load<Texture2D>("racing");
@@ -146,18 +148,13 @@ namespace Project1
             _backgroundTexture = Content.Load<Texture2D>("fondo");
             _menu = Content.Load<Texture2D>("fondo2");
             _personajes = Content.Load<Texture2D>("personajes");
-           
-            // Permite calcular los graficos(?)
+
+            // Permite calcular los graficos
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Carga la textura "pruebas" en la variable.
+            // Carga las texturas de partida
             _p1Texture = Content.Load<Texture2D>("a");
-            // Define la posición de inicio del sprite "pruebas".
             _p1Position = new Vector2(321, 340);
-
-
-            // Carga las textura "manzana" en la variable.
             _p2Texture = Content.Load<Texture2D>("a");
-            // (?)
             _p2Position = new Vector2(921, 340);
             _bochaTexture = Content.Load<Texture2D>("bocha5");
             _bochaPosition = new Vector2(621, 340);
@@ -171,14 +168,14 @@ namespace Project1
             _barraabajoPosition = new Vector2(48, 650);
             _barraizquierdaPosition = new Vector2(65, 30);
             _barraizquierdaarco = Content.Load<Texture2D>("p");
-            _barraizquierdaPositionarco = new Vector2(65,430);
+            _barraizquierdaPositionarco = new Vector2(65, 430);
             _barraderechaarco = Content.Load<Texture2D>("p");
             _barraderechaPositionarco = new Vector2(1183, 430);
-            _barragolizquierda =Content.Load<Texture2D>("p");
+            _barragolizquierda = Content.Load<Texture2D>("p");
             _barragolizquierdaPosition = new Vector2(37, 272);
-            _barragolderecha=Content.Load<Texture2D>("p");
-            _barragolderechaPosition = new Vector2(1220,272);
-           
+            _barragolderecha = Content.Load<Texture2D>("p");
+            _barragolderechaPosition = new Vector2(1220, 272);
+
 
 
 
@@ -186,7 +183,7 @@ namespace Project1
 
         protected override void Update(GameTime gameTime)
         {
-            if (pantalla == 1)
+            if (pantalla == 1)//Menu inicial
             {
                 KeyboardState inicio = Keyboard.GetState();
                 if (inicio.IsKeyDown(Keys.Enter))
@@ -195,7 +192,7 @@ namespace Project1
 
                 }
             }
-            else if (pantalla == 2)
+            else if (pantalla == 2)//Menu de personajes
             {
 
 
@@ -267,7 +264,8 @@ namespace Project1
                         elegido = 1;
                         nombrequip1 = "IND";
                     }
-                    if (_selectedTeam2 ==Team.River) {
+                    if (_selectedTeam2 == Team.River)
+                    {
                         elegido2 = 1;
                         nombrequip2 = "RIVER";
                     }
@@ -301,10 +299,10 @@ namespace Project1
                     tiempoestado = false;
                 }
                 tiempoActual3 = DateTime.Now;
-                dif3= tiempoActual3 - tiempo3;
+                dif3 = tiempoActual3 - tiempo3;
                 KeyboardState inicio3 = Keyboard.GetState();
+                //Cajas de colisiones
                 Rectangle pruebasRectangle = new Rectangle((int)_p1Position.X, (int)_p1Position.Y, 30, 30);
-                // Es la caja de coliciones de "pruebas" y se basa en el tamaño de la imgane.
                 Rectangle manzanaRectangle = new Rectangle((int)_p2Position.X, (int)_p2Position.Y, 30, 30);
                 Rectangle bochaRectangle = new Rectangle((int)_bochaPosition.X, (int)_bochaPosition.Y, 30, 30);
                 Rectangle lineaRectanglearcoderecha = new Rectangle((int)_barraderechaPositionarco.X, (int)_barraderechaPositionarco.Y, 1, 192);
@@ -314,7 +312,7 @@ namespace Project1
                 Rectangle linea3Rectangle = new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1);
                 Rectangle linea4Rectangle = new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 140);
                 Rectangle lineagolizquierda = new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 10, 200);
-                Rectangle lineagolderecha = new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,10,200);
+                Rectangle lineagolderecha = new Rectangle((int)_barragolderechaPosition.X, (int)_barragolderechaPosition.Y, 10, 200);
 
                 // Se utiliza para poder recibir el estado del teclado.
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -323,7 +321,9 @@ namespace Project1
                 float friccion1 = 0.99f;
                 float friccion = 0.6f;
                 Vector2 velocidad = new Vector2(2f, 2f);
-                if (bochaRectangle.Intersects(linea3Rectangle) )
+
+                //Rebote de la pelota
+                if (bochaRectangle.Intersects(linea3Rectangle))
                 {
                     Vector2 normal = Vector2.Normalize(new Vector2(linea3Rectangle.X - bochaRectangle.X, linea3Rectangle.Y - bochaRectangle.Y));
 
@@ -370,15 +370,15 @@ namespace Project1
                 }
 
 
-                if (elegido==1)
+                if (elegido == 1)
                 {
 
                     if (estado)
                     {
                         if (!si)
                         {
-                          
-                            Debug.Write("hola");
+
+                           
                             tiempo = DateTime.Now;
                             tiempoActual = DateTime.Now;
 
@@ -396,9 +396,9 @@ namespace Project1
                         if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
                         {
 
-                            
-                                _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
-                            
+
+                            _bochaSpeed = Vector2.Normalize(_p2Speed) * 4;
+
                         }
 
                         if (dif.Seconds == 30)
@@ -410,7 +410,6 @@ namespace Project1
                     }
                     if (!estado)
                     {
-                        Debug.Write("fino");
                         if (!si)
                         {
                             tiempo1 = DateTime.Now;
@@ -427,9 +426,9 @@ namespace Project1
                         if (bochaRectangle.Intersects(manzanaRectangle) && !_p2movimiento && keyboardState.IsKeyDown(Keys.T))
                         {
 
-                            
-                                _bochaSpeed = Vector2.Normalize(_p2Speed) * 10;
-                            
+
+                            _bochaSpeed = Vector2.Normalize(_p2Speed) * 10;
+
                         }
                         if (dif1.Seconds == 10)
                         {
@@ -439,11 +438,41 @@ namespace Project1
                         }
                     }
                 }
-               
+                //Reinicio despues de gol
+                if (bochaRectangle.Intersects(lineagolizquierda))
+                {
+                    equipo2 = equipo2 + 1;
+                    _bochaSpeed *= 0;
+                    _p1Position.X = 321;
+                    _p1Position.Y = 340;
+                    _p2Position.X = 921;
+                    _p2Position.Y = 340;
+                    _bochaPosition.X = 621;
+                    _bochaPosition.Y = 340;
 
 
+                }
+                if (bochaRectangle.Intersects(lineagolderecha))
+                {
+                    equipo1 = equipo1 + 1;
+                    _bochaSpeed *= 0;
+                    _p1Position.X = 321;
+                    _p1Position.Y = 340;
+                    _p2Position.X = 921;
+                    _p2Position.Y = 340;
+                    _bochaPosition.X = 621;
+                    _bochaPosition.Y = 340;
+                }
+                if (pausa == false || final == true)
+                {
+                    _bochaPosition.X += _bochaSpeed.X;
+                    _bochaSpeed *= friccion1;
 
-                if (keyboardState.IsKeyDown(Keys.Left) && pausa==false && final == true)
+                }
+
+
+                //Movimiento jugador1
+                if (keyboardState.IsKeyDown(Keys.Left) && pausa == false && final == true)
                 {
                     _p1Speed.X -= 2;
                     _p1movimiento = false;
@@ -465,38 +494,10 @@ namespace Project1
 
 
 
-              
-                if (bochaRectangle.Intersects(lineagolizquierda)) {
-                    equipo2 = equipo2 + 1;
-                    _bochaSpeed *=0;
-                    _p1Position.X = 321;
-                    _p1Position.Y = 340;
-                    _p2Position.X = 921;
-                    _p2Position.Y = 340;
-                    _bochaPosition.X = 621;
-                    _bochaPosition.Y = 340;
-                   
-                    
-                }
-                if (bochaRectangle.Intersects(lineagolderecha)) {
-                    equipo1 = equipo1 + 1;
-                    _bochaSpeed *= 0;
-                    _p1Position.X = 321;
-                    _p1Position.Y = 340;
-                    _p2Position.X = 921;
-                    _p2Position.Y = 340;
-                    _bochaPosition.X = 621;
-                    _bochaPosition.Y = 340;
-                }
-                if (pausa == false || final==true)
-                {
-                    _bochaPosition.X += _bochaSpeed.X;
-                    _bochaSpeed *= friccion1;
-                    
-                }
+
                 _p1Position.X += _p1Speed.X;
-                    _p1Speed *= friccion;
-                
+                _p1Speed *= friccion;
+
 
 
 
@@ -518,8 +519,8 @@ namespace Project1
 
 
 
-          
-                    if (pausa == false|| final==true)
+
+                if (pausa == false || final == true)
                 {
                     _bochaPosition.Y += _bochaSpeed.Y;
                     _bochaSpeed *= friccion1;
@@ -535,7 +536,7 @@ namespace Project1
 
 
 
-
+                //Movimiento jugador2
 
                 if (keyboardState.IsKeyDown(Keys.A) && pausa == false && final == true)
                 {
@@ -552,7 +553,7 @@ namespace Project1
                 {
                     _p2Speed.X = 0; _p2movimiento = true;
                 }
-               
+
                 if (pausa == false || final == true)
                 {
                     _bochaPosition.X += _bochaSpeed.X;
@@ -562,7 +563,7 @@ namespace Project1
                 _p2Speed *= friccion;
 
 
-                if (keyboardState.IsKeyDown(Keys.W) && pausa == false && final==true)
+                if (keyboardState.IsKeyDown(Keys.W) && pausa == false && final == true)
                 {
                     _p2Speed.Y -= 2; _p2movimiento = false;
                 }
@@ -578,90 +579,120 @@ namespace Project1
                     _p2Speed.Y = 0; _p2movimiento = true;
                 }
 
-               
+
 
                 if (pausa == false || final == true)
                 {
                     _bochaPosition.Y += _bochaSpeed.Y;
                     _bochaSpeed *= friccion1;
                 }
-                    _p2Position.Y += _p2Speed.Y;
+                _p2Position.Y += _p2Speed.Y;
                 _p2Speed *= friccion;
+
+
+
+
+
+
+                //Evita la superposicion
                 if (pruebasRectangle.Intersects(manzanaRectangle))
                 {
-                    // Determinar la dirección del empuje
                     Vector2 pushDirection = _p2Position - _p1Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
-                    // Aquí simplemente empujamos por una constante
-                    const float pushAmount = 3.8f; // Ajusta según tus necesidades
+                    const float pushAmount = 3.8f;
                     _p2Position += pushDirection * pushAmount;
                 }
                 if (manzanaRectangle.Intersects(pruebasRectangle))
                 {
-                    // Determinar la dirección del empuje
                     Vector2 pushDirection = _p1Position - _p2Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
-                    // Aquí simplemente empujamos por una constante
-                    const float pushAmount = 3.8f; // Ajusta según tus necesidades
+                    const float pushAmount = 3.8f;
                     _p1Position += pushDirection * pushAmount;
                 }
 
 
                 if (bochaRectangle.Intersects(manzanaRectangle))
                 {
-                    // Determinar la dirección del empuje
                     Vector2 pushDirection = _bochaPosition - _p2Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
-                    // Aquí simplemente empujamos por una constante
-                    const float pushAmount = 4.5f; // Ajusta según tus necesidades
+                    const float pushAmount = 4.5f;
                     _bochaPosition += pushDirection * pushAmount;
 
                 }
                 if (bochaRectangle.Intersects(pruebasRectangle))
                 {
-                    // Determinar la dirección del empuje
                     Vector2 pushDirection = _bochaPosition - _p1Position;
                     pushDirection.Normalize();
 
-                    // La cantidad de empuje puede ser una constante o basada en la profundidad de superposición.
-                    // Aquí simplemente empujamos por una constante
-                    const float pushAmount = 4f; // Ajusta según tus necesidades
+                    const float pushAmount = 4f;
                     _bochaPosition += pushDirection * pushAmount;
 
                 }
-                if (inicio3.IsKeyDown(Keys.Escape)) {
-                    pausa = true;
-                    
-                
+
+
+
+                if (manzanaRectangle.Intersects(bochaRectangle))
+                {
+                    Vector2 pushDirection = _p2Position - _bochaPosition;
+                    pushDirection.Normalize();
+
+                    const float pushAmount = 4.5f;
+                    _p2Position += pushDirection * pushAmount;
+
                 }
-                if (pausa==true) {
+                if (pruebasRectangle.Intersects(bochaRectangle))
+                {
+                    Vector2 pushDirection = _p1Position - _bochaPosition;
+                    pushDirection.Normalize();
+
+                    const float pushAmount = 4f;
+                    _p1Position += pushDirection * pushAmount;
+
+                }
+
+
+
+
+
+
+
+                //Menu pausa
+
+                if (inicio3.IsKeyDown(Keys.Escape))
+                {
+                    pausa = true;
+
+
+                }
+                if (pausa == true)
+                {
                     if (inicio3.IsKeyDown(Keys.Q))
                     {
                         pausa = false;
 
                     }
-                    if (inicio3.IsKeyDown(Keys.P)) {
+                    if (inicio3.IsKeyDown(Keys.P))
+                    {
                         Exit();
                     }
-                   
-                    
+
+
                 }
-                if (final==false) {
-                    if (inicio3.IsKeyDown(Keys.Escape)) {
+                if (final == false)
+                {
+                    if (inicio3.IsKeyDown(Keys.Escape))
+                    {
                         Exit();
                     }
-                
+
                 }
 
-             
+
             }
-            base.Update(gameTime); 
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -671,7 +702,7 @@ namespace Project1
 
             _spriteBatch.Begin();
 
-
+            //Draw de los Menus
             if (pantalla == 1)
             {
                 _spriteBatch.Draw(_menu, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
@@ -692,7 +723,7 @@ namespace Project1
                 Color colork = Color.White;
 
                 _spriteBatch.Draw(_personajes, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                _spriteBatch.Draw(_river, new Rectangle((int)_riverPosition.X,(int)_riverPosition.Y,90,90), _selectedTeam == Team.River ? Color.Red : Color.White);
+                _spriteBatch.Draw(_river, new Rectangle((int)_riverPosition.X, (int)_riverPosition.Y, 90, 90), _selectedTeam == Team.River ? Color.Red : Color.White);
                 _spriteBatch.Draw(_boca, new Rectangle((int)_bocaPosition.X, (int)_bocaPosition.Y, 90, 90), _selectedTeam == Team.Boca ? Color.Red : Color.White);
                 _spriteBatch.Draw(_racing, new Rectangle((int)_racingPosition.X, (int)_racingPosition.Y, 90, 90), _selectedTeam == Team.Racing ? Color.Red : Color.White);
                 _spriteBatch.Draw(_independiente, new Rectangle((int)_independientePosition.X, (int)_independientePosition.Y, 90, 90), _selectedTeam == Team.Independiente ? Color.Red : Color.White);
@@ -720,9 +751,9 @@ namespace Project1
                 }
 
 
-                
 
-                if (_selectedTeam2== Team.River)
+
+                if (_selectedTeam2 == Team.River)
                 {
                     _spriteBatch.Draw(_riverjuga, new Rectangle(800, (int)_riverjugaPosition.Y, 180, 180), Color.White);
                 }
@@ -741,21 +772,22 @@ namespace Project1
 
 
             }
-            else if (pantalla==3) {
+            else if (pantalla == 3)
+            {
                 string conth = "Presione P para pausar";
                 Vector2 posicionh = new Vector2(1100, 35);
                 Color colorh = Color.White;
-                string  cont="Contador:"+Convert.ToString(dif3.Seconds);
+                string cont = "Contador:" + Convert.ToString(dif3.Seconds);
                 Vector2 posicion4 = new Vector2(250, 35);
                 Color color4 = Color.White;
 
 
-                string resul=Convert.ToString(equipo1);
+                string resul = Convert.ToString(equipo1);
 
-                Vector2 posicion = new Vector2(477,30);
+                Vector2 posicion = new Vector2(477, 30);
                 Color color = Color.White;
 
-                string resul2= Convert.ToString(equipo2);
+                string resul2 = Convert.ToString(equipo2);
                 Vector2 posicion2 = new Vector2(800, 30);
                 Color color2 = Color.White;
                 string resulq = Convert.ToString(nombrequip1);
@@ -789,11 +821,12 @@ namespace Project1
                 _spriteBatch.Draw(_barraarriba, new Rectangle((int)_barraarribaPosition.X, (int)_barraarribaPosition.Y, 1200, 1), Color.Transparent);
                 _spriteBatch.Draw(_barraabajo, new Rectangle((int)_barraabajoPosition.X, (int)_barraabajoPosition.Y, 1200, 1), Color.Transparent);
                 _spriteBatch.Draw(_barragolizquierda, new Rectangle((int)_barragolizquierdaPosition.X, (int)_barragolizquierdaPosition.Y, 30, 175), Color.Red);
-                _spriteBatch.Draw(_barragolderecha, new Rectangle((int)_barragolderechaPosition.X,(int)_barragolderechaPosition.Y,30,170),Color.Red);
+                _spriteBatch.Draw(_barragolderecha, new Rectangle((int)_barragolderechaPosition.X, (int)_barragolderechaPosition.Y, 30, 170), Color.Red);
 
-                if (pausa == true) {
-                    _spriteBatch.Draw(_pausa, new Rectangle((int)_pausaPosition.X, (int)_pausaPosition.Y, 200, 200),Color.White);
-                   
+                if (pausa == true)
+                {
+                    _spriteBatch.Draw(_pausa, new Rectangle((int)_pausaPosition.X, (int)_pausaPosition.Y, 200, 200), Color.White);
+
 
 
                 }
@@ -823,7 +856,7 @@ namespace Project1
                     _spriteBatch.DrawString(myFont, resuld, posiciond, colord);
                     _spriteBatch.DrawString(myFont, resulv, posicionv, colorv);
                 }
-                if (equipo1==2 || equipo2==2)
+                if (equipo1 == 2 || equipo2 == 2)
                 {
                     string resuld = Convert.ToString(nombrequip1);
 
@@ -850,7 +883,7 @@ namespace Project1
                     _spriteBatch.DrawString(myFont, resulv, posicionv, colorv);
 
                 }
-                
+
             }
 
 
